@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+html,body{
+	height:100%;
+}
+
+.Wrap{
+	width:100%;
+	height: 100%;
+	position: relative;
+	
+}
+
+.LoginTable{
+	position: absolute;
+	top:50%;
+	left:50%;
+	margin-left:-250px;
+	margin-top:-200px;
+}
+
+.LoginWrap{
+	border-left: 1px solid;
+	border-color: gray;
+	padding: 50px;
+}
+
+.LoginWrap input {
+	height: 25px;
+	width: 200px;
+	margin-bottom: 10px;
+}
+
+button {
+	width: 200px;
+	height: 30px;
+}
+
+.LoginText{
+	color: gray;
+	font-weight:  bold;
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.Ex{
+	color: gray;
+	font-size:12px;
+	margin-bottom: 5px
+}
+
+button {
+	background-color: #6BC7BF;
+	border: 0;
+	outline: 0;
+	color:white;
+}
+img {
+	margin-right: 30px;
+}
+
+.error {
+	color:red;
+	font-size:12px;
+	display:none;
+}

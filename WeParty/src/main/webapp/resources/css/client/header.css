@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+a.t, a.t:link { color: white; text-decoration: none;}
+a.t:visited { color: white; text-decoration: none;}
+a.t:hover { color: #CAF8F4; text-decoration: none;}
+a.t:active { color: white; text-decoration: none; }
+
+.menubar {
+	background-color:#6BC7BF; width:(max-width)-100px; height:25px; 
+	text-align:center; font-size:18px; padding:10px; font-weight: bold;
+	color:white; margin-top:17px
+}
+ 
+input:focus{outline:none;}

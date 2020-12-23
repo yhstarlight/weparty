@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info_board">
+	<insert id="insertInfoBoard">
+		INSERT INTO info_board (info_board_no, info_board_writer_id, info_board_writer_nick,
+		info_board_new_file,info_board_origin_file,info_board_title,info_board_content) VALUES ((SELECT nvl(max(info_board_no), 0)+1 FROM info_board),
+		#{info_board_writer_id}, #{info_board_writer_nick}, #{info_board_new_file}, #{info_board_origin_file}, #{info_board_title},
+		#{info_board_content})
+	</insert>
+	
+	<select id="getInfoBoardList" resultType="infoBoard">
+		 SELECT * FROM
+	   (SELECT rowNum rNum,info_board_no,info_board_writer_nick,info_board_title,info_board_hit,info_board_reply_cnt
+	   FROM(SELECT info_board_no,info_board_writer_nick,info_board_title,info_board_hit,
+	   (select count(*) from info_board_reply where info_board_no = info_board.info_board_no) info_board_reply_cnt
+	   FROM info_board 
+		WHERE 1=1
+		<if test="search_condition=='title'">
+			AND info_board_title LIKE '%'||#{search_keyword}||'%'
+		</if>
+		<if test="search_condition=='writer'">
+			AND info_board_writer_nick LIKE '%'||#{search_keyword}||'%'
+		</if>
+		ORDER BY info_board_no desc))
+	   WHERE rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="getInfoBoardCount" resultType="int">
+		SELECT count(*) FROM (SELECT * FROM info_board 
+		WHERE 1=1
+		<if test="search_condition=='title'">
+			AND info_board_title LIKE '%'||#{search_keyword}||'%'
+		</if>
+		<if test="search_condition=='writer'">
+			AND info_board_writer_nick LIKE '%'||#{search_keyword}||'%'
+		</if>)
+	</select>
+	
+	<select id="getInfoBoardContent" resultType="infoBoard">
+		SELECT * FROM info_board WHERE info_board_no=#{info_board_no}
+	</select>
+	
+	<update id="updateInfoBoardHit">
+		UPDATE info_board SET info_board_hit=info_board_hit+1 WHERE info_board_no=#{info_board_no}
+	</update>
+	
+	<update id="updateInfoBoard">
+		UPDATE info_board SET info_board_title=#{info_board_title}, info_board_content=#{info_board_content}, info_board_new_file=#{info_board_new_file},
+		info_board_origin_file=#{info_board_origin_file} WHERE info_board_no=#{info_board_no}
+	</update>
+	
+	<delete id="deleteInfoBoard">
+		DELETE FROM info_board WHERE info_board_no=#{info_board_no}
+	</delete>
+</mapper>

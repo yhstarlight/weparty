@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info_reply">
+	<insert id="insertInfoReply">
+		INSERT INTO info_board_reply (info_reply_no, info_board_no, info_reply_writer_id,
+		info_reply_writer_nick, info_reply_content) VALUES
+		((SELECT nvl(max(info_reply_no), 0)+1 FROM info_board_reply), #{info_board_no}, #{info_reply_writer_id}, #{info_reply_writer_nick}, #{info_reply_content})
+	</insert>
+	
+	<select id="getInfoReplyList" resultType="infoReply">
+		SELECT * FROM info_board_reply WHERE info_board_no=#{info_board_no} ORDER BY info_reply_no
+	</select>
+	
+	<delete id="deleteInfoReply">
+		DELETE FROM info_board_reply WHERE info_reply_no=#{info_reply_no}
+	</delete>
+	
+	<update id="updateInfoReply">
+		UPDATE info_board_reply	SET info_reply_content=#{info_reply_content} WHERE info_reply_no=#{info_reply_no}
+	</update>
+</mapper>

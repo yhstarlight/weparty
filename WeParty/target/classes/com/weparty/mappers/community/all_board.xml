@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="all_board">
+	<select id="getAllBoardList" resultType="allBoard">
+		SELECT * FROM (SELECT rowNum rNum, board_type, board_no, board_title, board_hit, board_reply_cnt
+		FROM(SELECT '자유 게시판' AS board_type, free_board_no AS board_no, free_board_title AS board_title, 
+		free_board_hit AS board_hit,
+		(SELECT COUNT(*) FROM free_board_reply WHERE free_board_no = free_board.free_board_no) board_reply_cnt 
+		from free_board WHERE free_board_writer_id=#{board_writer_id}
+		UNION ALL
+		SELECT '정보 나눔터' AS board_type, info_board_no, info_board_title, info_board_hit,
+		(SELECT COUNT(*) FROM info_board_reply WHERE info_board_no = info_board.info_board_no) board_reply_cnt
+		from info_board
+		WHERE info_board_writer_id=#{board_writer_id}
+		ORDER BY board_no DESC))
+		WHERE rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM (
+			SELECT free_board_no FROM free_board WHERE free_board_writer_id=#{board_writer_id}
+      		UNION ALL
+      		SELECT info_board_no FROM info_board WHERE info_board_writer_id=#{board_writer_id}
+		)
+	</select>
+</mapper>

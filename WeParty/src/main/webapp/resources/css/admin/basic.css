@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+html,body {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.Menu {
+	width:250px;
+	height: 100%;
+	background-color: #78817D;
+	padding-top:20px;
+	float: left;
+}
+
+.Menu .We {
+	font-size:24px;
+	color: #6BC7BF;
+}
+
+.Menu .Party{
+	font-size: 24px;
+	color:white;
+}
+
+hr {
+	border:1px solid #6BC7BF;
+}
+
+.MenuText img {
+	width:20px;
+	height:20px;
+}
+
+.Menu .MenuText{
+	padding: 0 0 0 20px;
+	font-size : 16px;	
+	display: flex;
+	align-items: center;
+	line-height: 40px;
+	color:white;
+}
+
+.MenuText:hover{background:#6BC7BF}
+
+.MainBackDiv{
+	padding: 20px;
+	padding-left: 270px;
+	background-color: #EFF4F4;
+	height: 100%
+}
+
+.MainDiv{
+	padding:10px;
+	margin-top:20px;
+	background-color: white;
+}
+
+a {
+	color:gray; text-decoration: none;
+}
+
+span {
+	color:gray;
+}
+
+table td{
+	text-overflow: ellipsis;
+}
+
+input,textarea{color: gray; font-size:14px}

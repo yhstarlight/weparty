@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="all_contest">
+	
+	<select id="getAllContestList" resultType="all_contest">
+		SELECT * FROM (SELECT rowNum rNum, all_type, all_no, all_field, all_title, all_startdate, all_enddate
+		FROM(SELECT '대기' AS all_type, wait_no AS all_no, wait_field AS all_field, wait_title AS all_title, 
+		wait_startdate AS all_startdate, wait_enddate AS all_enddate FROM wait_contest
+		UNION ALL
+		SELECT '승인' AS all_type, approve_no AS all_no, approve_field AS all_field, approve_title AS all_title, 
+		approve_startdate AS all_startdate, approve_enddate AS all_enddate FROM approve_contest
+		UNION ALL
+		SELECT '취소' AS all_type, cancel_no AS all_no, cancel_field AS all_field, cancel_title AS all_title, 
+		cancel_startdate AS all_startdate, cancel_enddate AS all_enddate FROM cancel_contest
+		ORDER BY all_type,all_no DESC))
+		WHERE rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="getUserAllContestList" resultType="all_contest">
+		SELECT * FROM (SELECT rowNum rNum, all_type, all_no, all_field, all_title, all_startdate, all_enddate
+		FROM(SELECT '대기' AS all_type, wait_no AS all_no, wait_field AS all_field, wait_title AS all_title, 
+		wait_startdate AS all_startdate, wait_enddate AS all_enddate FROM wait_contest WHERE wait_writer_id=#{all_writer_id}
+		UNION ALL
+		SELECT '승인' AS all_type, approve_no AS all_no, approve_field AS all_field, approve_title AS all_title, 
+		approve_startdate AS all_startdate, approve_enddate AS all_enddate FROM approve_contest WHERE approve_writer_id=#{all_writer_id}
+		UNION ALL
+		SELECT '취소' AS all_type, cancel_no AS all_no, cancel_field AS all_field, cancel_title AS all_title, 
+		cancel_startdate AS all_startdate, cancel_enddate AS all_enddate FROM cancel_contest WHERE cancel_writer_id=#{all_writer_id}
+		ORDER BY all_no DESC))
+		WHERE rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="allContestCount" resultType="int">
+		SELECT COUNT(*) FROM (
+		SELECT wait_no FROM wait_contest
+		UNION ALL
+		SELECT approve_no FROM approve_contest
+		UNION ALL
+		SELECT cancel_no FROM cancel_contest
+		)
+	</select>
+	
+	<select id="userAllContestCount" resultType="int">
+	SELECT COUNT(*) FROM (
+	SELECT wait_no FROM wait_contest WHERE wait_writer_id=#{user_id}
+	UNION ALL
+	SELECT approve_no FROM approve_contest WHERE approve_writer_id=#{user_id}
+	UNION ALL
+	SELECT cancel_no FROM cancel_contest WHERE cancel_writer_id=#{user_id}
+	)
+	</select>
+</mapper>

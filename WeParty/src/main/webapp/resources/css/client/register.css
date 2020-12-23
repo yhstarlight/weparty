@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.l {
+padding-bottom: 30px;
+}
+
+input.in {
+border:1px solid;  border-color: #BBBBBB;
+height:25px; padding-left:10px;
+}
+
+input.regist {
+background:#6BC7BF; color:white;
+border:0; outline:0; width:60px; height:30px;
+margin-top:20px;
+}
+
+td {
+	color:gray;
+}
+
+td.fontA {
+	font-size:14px;
+}
+
+td.fontB {
+	font-size:11px; dlsplay:inline-block;
+}
+
+td.fontC {
+	font-size:11px; color:red; display:none;
+}
+
+td.checkBox {
+	width:350px;
+}
+
+button {
+	width:80px; height:26px;
+}
+
+span {
+	font-size:13px;
+}

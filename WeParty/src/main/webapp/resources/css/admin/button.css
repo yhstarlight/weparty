@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+button {
+	height: 40px;
+	border-radius: 5px;
+	border : 1px solid #B2B2B2
+}
+
+.approve{
+	background-color: #6BC7BF;
+	color: white;
+}
+
+.cancel{
+	background-color: #EBA5AE;
+	color: white;
+}
+
+.classic{
+	border-radius: 0px;
+	background-color: white;
+}

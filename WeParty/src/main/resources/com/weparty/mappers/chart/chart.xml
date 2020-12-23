@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chart">
+	<select id="getUserGenderList" resultType="gender_chart">
+		SELECT (CASE WHEN user_gender = 'f' THEN '여성' ELSE '남성' END) user_gender,
+		 count(*) AS user_genderCount FROM user_info GROUP BY user_gender
+	</select>
+	
+	<select id="getUserInterestList" resultType="interest_chart">
+		select count(decode(architecture,'y',1)) as architecture_count, count(decode(game,'y',1)) as game_count,
+		count(decode(science,'y',1)) as science_count, count(decode(scenario,'y',1)) as scenario_count, 
+		count(decode(ucc,'y',1)) as ucc_count, count(decode(supporters,'y',1)) as supporters_count,
+		count(decode(web,'y',1)) as web_count from user_interest
+	</select>
+	
+	<select id="getContestFieldList" resultType="field_chart">
+		select approve_field as contest_field_name, count(*) as contest_field_count from approve_contest group by approve_field order by approve_field
+	</select>
+	
+	<select id="getUserAgeList" resultType="age_chart">
+		select user_age , count(*) as user_age_count from user_info group by user_age order by user_age
+	</select>
+	
+	<select id="getUserRegDateList" resultType="regdate_chart">
+		select to_char(to_date(substr(user_regdate,6,5),'mm/dd'),'mm/dd') as user_regdate, count(*) as user_regdate_count
+		FROM user_info WHERE user_regdate>='2020-12-14' and user_regdate&lt;'2020-12-31'
+		GROUP BY substr(user_regdate,6,5) order by user_regdate
+	</select>
+	
+	<select id="getVisitList" resultType="visit_chart">
+		select substr(visitor_date,4,5) as visit_date , count(*) as visit_count from visitor group by substr(visitor_date,4,5) order by visit_date
+	</select>
+</mapper>

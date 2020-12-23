@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="all_reply">
+	<select id="getUserAllReplyList" resultType="allReply">
+		SELECT * FROM (SELECT rowNum rNum, reply_type, reply_no, board_no, reply_content 
+		FROM(SELECT '자유' AS reply_type, free_reply_no AS reply_no, free_board_no AS board_no, free_reply_content AS reply_content
+		from free_board_reply WHERE free_reply_writer_id=#{reply_writer_id}
+		UNION ALL
+		SELECT '정보' AS reply_type, info_reply_no, info_board_no, info_reply_content from info_board_reply WHERE info_reply_writer_id=#{reply_writer_id}
+		ORDER BY reply_no DESC))
+		WHERE rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="userAllReplyCount" resultType="int">
+		SELECT COUNT(*) FROM(SELECT * FROM free_board_reply WHERE free_reply_writer_id=#{reply_writer_id}
+		UNION ALL
+		SELECT * FROM info_board_reply WHERE info_reply_writer_id=#{reply_writer_id})
+	</select>
+	
+</mapper>

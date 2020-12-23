@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cancel_contest">
+
+	<insert id="insertCancelContest">
+		INSERT INTO cancel_contest VALUES ((select nvl(max(cancel_no), 0)+1 from cancel_contest), #{cancel_writer_id}, #{cancel_title},
+		#{cancel_content}, #{cancel_host}, #{cancel_homepage}, #{cancel_target}, #{cancel_field}, #{cancel_poster}, #{cancel_poster_origin}, #{cancel_file}, #{cancel_file_origin},
+		TO_DATE(#{cancel_startdate},'yyyy/mm/dd'), TO_DATE(#{cancel_enddate},'yyyy/mm/dd'),#{cancel_reason})
+	</insert>
+	
+	<select id="getCancelContestList" resultType="cancel_contest">
+		SELECT * FROM (SELECT rowNum rNum, cancel_no, cancel_field, cancel_title, cancel_startdate, cancel_enddate, cancel_reason
+		FROM(SELECT * FROM cancel_contest ORDER BY cancel_no DESC))
+		WHERE rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="cancelContestCount" resultType="int">
+		SELECT COUNT(*) FROM cancel_contest
+	</select>
+	
+	<select id="getCancelContestContent" resultType="cancel_contest">
+		SELECT * FROM cancel_contest WHERE cancel_no=#{cancel_no}
+	</select>
+	
+	<delete id="deleteCancelContest">
+		DELETE FROM cancel_contest WHERE cancel_no=#{cancel_no}
+	</delete>
+</mapper>

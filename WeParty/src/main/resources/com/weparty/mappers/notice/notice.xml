@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+	<insert id="insertNotice">
+		INSERT INTO notice (notice_no, notice_title, notice_file, notice_file_origin, notice_content) VALUES ((select nvl(max(notice_no), 0)+1 from notice),
+		#{notice_title},#{notice_file},#{notice_file_origin},#{notice_content})
+	</insert>
+	
+	<select id="getNoticeList" resultType="notice">
+		SELECT * FROM
+	   (SELECT rowNum rNum,notice_no,notice_title,notice_hit,notice_regdate
+	   FROM(SELECT * FROM notice 
+	   WHERE 1=1 AND notice_title LIKE '%'||#{search_keyword}||'%'
+       ORDER BY notice_no desc))
+	   WHERE rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="noticeCount" resultType="int">
+		SELECT count(*) FROM notice
+	</select>
+	
+	<select id="getNoticeContent" resultType="notice" >
+		SELECT * FROM notice WHERE notice_no=#{notice_no}
+	</select>
+	
+	<delete id="deleteNotice">
+		DELETE FROM notice WHERE notice_no=#{notice_no}
+	</delete>
+	
+	<update id="updateNotice">
+		UPDATE notice SET notice_title=#{notice_title}, notice_file=#{notice_file}, notice_file_origin=#{notice_file_origin},
+		notice_content=#{notice_content} WHERE notice_no=#{notice_no}
+	</update>
+	
+	<update id="updateNoticeHit">
+		UPDATE notice SET notice_hit=#{notice_hit} where notice_no=#{notice_no}
+	</update>
+</mapper>

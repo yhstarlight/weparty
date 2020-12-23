@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+td.content {font-size: 14px}
+
+.MainTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: center;
+    line-height: 1.5;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    margin : 20px 10px;
+    color: gray;
+}
+.MainTable th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-right: 1px solid white !important;
+    border-bottom: 1px solid white !important;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    background: #EFF4F4;
+    color: gray;
+}
+.MainTable td {
+    padding: 5px;
+    vertical-align: middle;
+    border-right: 1px solid white !important;
+    border-bottom: 1px solid #ccc;
+}
+
+.PageNum {
+	text-align: center;
+}
+
+.MainTable tr.list:hover{background: #EFF4F4}
+
+.ContentTable .title{
+	font-size: 24px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+.Detail {
+	margin-right:10px;
+}
+	
+.Detail th {
+	width: 100px;
+	background-color: white;
+}
+
+.Detail td{
+	text-align: left;
+	max-width:300px;
+	word-break:break-all;
+	border:0
+}
+
+.MainTable td.noneLine{
+	border-bottom: 0px solid white;
+}
+
+.ContentTable2{
+	border-collapse: separate;
+    border-spacing: 0;
+    text-align: center;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    margin : 20px 10px;
+    color: gray;
+}
+
+.ContentTable2 th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: #EFF4F4;
+    color: gray;
+}
+
+.ContentTable2 td {
+    padding: 5px;
+    padding-left: 10px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}

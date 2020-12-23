@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="interest">
+
+	<insert id="insertInterest">
+	INSERT INTO user_interest VALUES (#{interest_user_id}, #{web}, #{scenario}, #{ucc}, #{science}, #{game}, #{architecture}, #{supporters})
+	</insert>
+	
+	<select id="getInterest" resultType="interest">
+	SELECT * FROM user_interest WHERE interest_user_id=#{user_id}
+	</select>
+	
+	<update id="updateInterest">
+	UPDATE user_interest SET web=#{web}, scenario=#{scenario}, ucc=#{ucc}, science=#{science}, game=#{game}, architecture=#{architecture},
+	supporters=#{supporters} WHERE interest_user_id=#{interest_user_id}
+	</update>
+
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="approve_contest">
+
+	<insert id="insertApproveContest">
+		INSERT INTO approve_contest VALUES ((select nvl(max(approve_no), 0)+1 from approve_contest), #{approve_writer_id}, #{approve_title},
+		#{approve_content}, #{approve_host}, #{approve_homepage}, #{approve_target}, #{approve_field}, #{approve_poster}, #{approve_poster_origin}, #{approve_file}, #{approve_file_origin},
+		TO_DATE(#{approve_startdate},'yyyy/mm/dd'), TO_DATE(#{approve_enddate},'yyyy/mm/dd'),0)
+	</insert>
+	
+	<select id="getApproveContestList" resultType="approve_contest">
+		SELECT * FROM (SELECT rowNum rNum, approve_no, approve_field, approve_title, approve_startdate, approve_enddate, approve_hit, approve_poster
+		FROM(SELECT * FROM approve_contest
+		WHERE 1=1
+		AND approve_title LIKE '%'||#{search_keyword}||'%'
+		ORDER BY approve_no DESC))
+		WHERE (rNum &gt;= #{startrow} AND rNum &lt;= #{endrow})
+		<if test="approve_field == 'web'">
+			AND approve_field='웹/모바일'
+		</if>
+		<if test="approve_field =='scenario'">
+    	     AND approve_field='글/문학'
+ 	    </if>
+ 	    <if test="approve_field =='ucc'">
+    	     AND approve_field='사진/UCC'
+ 	    </if>
+ 	    <if test="approve_field =='science'">
+    	     AND approve_field='과학'
+ 	    </if>
+ 	    <if test="approve_field =='game'">
+    	     AND approve_field='게임'
+ 	    </if>
+ 	    <if test="approve_field =='architecture'">
+    	     AND approve_field='건축'
+ 	    </if>
+ 	    <if test="approve_field =='supporters'">
+    	     AND approve_field='서포터즈/대외활동'
+ 	    </if>
+		
+	</select>
+	
+	<select id="approveContestCount" resultType="int">
+		SELECT COUNT(*) FROM (SELECT rowNum rNum, approve_no, approve_field, approve_title, approve_startdate, approve_enddate, approve_hit, approve_poster
+		FROM(SELECT * FROM approve_contest
+		WHERE 1=1
+		AND approve_title LIKE '%'||#{search_keyword}||'%'
+		ORDER BY approve_no DESC))
+		<if test="approve_field == 'web'">
+			WHERE approve_field='웹/모바일'
+		</if>
+		<if test="approve_field =='scenario'">
+    	     WHERE approve_field='글/문학'
+ 	    </if>
+ 	    <if test="approve_field =='ucc'">
+    	     WHERE approve_field='사진/UCC'
+ 	    </if>
+ 	    <if test="approve_field =='science'">
+    	     WHERE approve_field='과학'
+ 	    </if>
+ 	    <if test="approve_field =='game'">
+    	     WHERE approve_field='게임'
+ 	    </if>
+ 	    <if test="approve_field =='architecture'">
+    	     WHERE approve_field='건축'
+ 	    </if>
+ 	    <if test="approve_field =='supporters'">
+    	     WHERE approve_field='서포터즈/대외활동'
+ 	    </if>
+	</select>
+	
+	<select id="getApproveContestContent" resultType="approve_contest">
+		SELECT * FROM approve_contest WHERE	approve_no=#{approve_no}
+	</select>
+	
+	<delete id="deleteApproveContest">
+		DELETE FROM approve_contest WHERE approve_no=#{approve_no}
+	</delete>
+	
+	<update id="updateApproveContestHit">
+		UPDATE approve_contest SET approve_hit=#{approve_hit} WHERE approve_no=#{approve_no}
+	</update>
+
+</mapper>

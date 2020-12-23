@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+html, body, button {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	background: #6BC7BF;
+	color: white;
+	border: 0;
+	outline: 0;
+}
+
+.l {
+	border: 1px solid;
+	height: max-height;
+	margin: 0 auto;
+	border-color: #BBBBBB;
+	border-radius: 10px;
+	margin-top: 20px;
+}
+
+input, textarea {
+	font-family: Consolas;
+}
+
+body,input,textarea,option,select{
+	color:gray;
+}

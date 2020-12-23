@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+table.comTable {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+	margin : 20px 10px;
+	color:gray;
+}
+table.comTable th {
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    text-align:center;
+    border-bottom: 1px solid #ccc;
+    background: #ECF7F6;
+}
+table.comTable td {
+    padding: 5px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ccc;
+    text-align:center;
+    font-size:14px;
+}
+
+table.comTable td.title {
+	text-align:left;
+}
+
+input.log {
+		height:24px !important; width:126px !important;
+	}
+	
+html { overflow-y:scroll; }
+
+a.name{ color: gray; text-decoration: none;}
+
+button.replyBtn {
+	color:gray;
+	background-color: white;
+	border: 1px solid gray;
+	width: 100px;
+	height: 30px;
+}
+
+table.replyTable{
+	width:675px;
+	font-size:13px;
+}
+
+table.replyTable td{
+	text-align:left;
+	border-bottom: 0px;
+	padding-left:15px;
+	padding-right:15px;
+}
+
+table.replyTable td.edit{
+	font-size:12px;
+	text-align:right;
+}

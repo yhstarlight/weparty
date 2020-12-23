@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="display">
+
+	<insert id="insertDisplay">
+		INSERT INTO display (display_no, display_link, display_poster) VALUES ((select nvl(max(display_no), 0)+1 from display),
+		#{display_link}, #{display_poster})
+	</insert>
+	
+	<select id="getDisplayList" resultType="display">
+		SELECT * FROM display order by display_no
+	</select>
+	
+	<delete id="deleteDisplay">
+		DELETE FROM display WHERE display_no=#{display_no}
+	</delete>
+	
+	<select id="getDisplayPosterPath" resultType="String">
+		SELECT display_poster FROM display WHERE display_no=#{display_no}
+	</select>
+	
+	<update id="updateDisplay">
+		UPDATE display SET display_poster=#{display_poster}, display_link=#{display_link} WHERE display_no=#{display_no} 
+	</update>
+</mapper>

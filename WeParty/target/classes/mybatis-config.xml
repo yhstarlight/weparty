@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<settings>
+	<setting name="cacheEnabled" value="false"/>
+	<setting name="jdbcTypeForNull" value="NULL"/>
+</settings>
+
+<typeAliases>
+	
+	<typeAlias alias="user" type="com.weparty.user.vo.UserVO"/>
+
+	<typeAlias alias="interest" type="com.weparty.interest.vo.InterestVO"/>
+	
+	<typeAlias alias="question" type="com.weparty.qa.vo.QuestionVO"/>
+
+	<typeAlias alias="question_type" type="com.weparty.qa.vo.QuestionTypeVO"/>
+	
+	<typeAlias alias="answer" type="com.weparty.qa.vo.AnswerVO"/>
+	
+	<typeAlias alias="freeBoard" type="com.weparty.community.vo.FreeBoardVO"/>
+	
+	<typeAlias alias="freeReply" type="com.weparty.reply.vo.FreeReplyVO"/>
+
+	<typeAlias alias="infoReply" type="com.weparty.reply.vo.InfoReplyVO"/>
+
+	<typeAlias alias="allReply" type="com.weparty.reply.vo.AllReplyVO"/>
+	
+	<typeAlias alias="infoBoard" type="com.weparty.community.vo.InfoBoardVO"/>
+
+	<typeAlias alias="allBoard" type="com.weparty.community.vo.AllBoardVO"/>
+	
+	<typeAlias alias="manager" type="com.weparty.manager.vo.ManagerVO"/>
+	
+	<typeAlias alias="wait_contest" type="com.weparty.contest.vo.WaitContestVO"/>
+	
+	<typeAlias alias="approve_contest" type="com.weparty.contest.vo.ApproveContestVO"/>
+	
+	<typeAlias alias="cancel_contest" type="com.weparty.contest.vo.CancelContestVO"/>
+	
+	<typeAlias alias="all_contest" type="com.weparty.contest.vo.AllContestVO"/>
+	
+	<typeAlias alias="display" type="com.weparty.display.vo.DisplayVO"/>
+	
+	<typeAlias alias="notice" type="com.weparty.notice.vo.NoticeVO"/>
+	
+	<typeAlias alias="gender_chart" type="com.weparty.chart.vo.GenderChartVO"/>
+	
+	<typeAlias alias="interest_chart" type="com.weparty.chart.vo.InterestChartVO"/>
+	
+	<typeAlias alias="field_chart" type="com.weparty.chart.vo.FieldChartVO"/>
+	
+	<typeAlias alias="age_chart" type="com.weparty.chart.vo.AgeChartVO"/>
+	
+	<typeAlias alias="regdate_chart" type="com.weparty.chart.vo.RegDateChartVO"/>
+	
+	<typeAlias alias="regdate_chart" type="com.weparty.chart.vo.RegDateChartVO"/>
+	
+	<typeAlias alias="visit_chart" type="com.weparty.chart.vo.VisitChartVO"/>
+	
+</typeAliases>
+	
+</configuration>

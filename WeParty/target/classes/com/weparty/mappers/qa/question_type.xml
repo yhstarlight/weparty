@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="question_type">
+	<select id="getQuestionType" resultType="question_type">
+		SELECT * FROM question_type ORDER BY question_type_no
+	</select>
+	
+	<insert id="insertQuestionType">
+		INSERT INTO question_type VALUES ((select nvl(max(question_type_no), 0)+1 from question_type),#{question_type_name})
+	</insert>
+	
+	<update id="updateQuestionType">
+		UPDATE question_type SET question_type_name=#{question_type_name} WHERE question_type_no=#{question_type_no}
+	</update>
+	
+	<delete id="deleteQuestionType">
+		DELETE FROM question_type WHERE question_type_no=#{question_type_no}
+	</delete>
+</mapper> 

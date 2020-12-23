@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+table.registTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    margin : 20px 10px;
+}
+table.registTable th {
+    width: 150px;
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    background: #ECF7F6;
+    color: gray;
+}
+table.registTable td.in {
+    text-align: left;
+    width: 350px;
+    padding: 5px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+td.check {
+	width:88px;
+}
+
+input:focus{outline:none; }
+input { margin-left:5px; border:0;}
+textarea{ margin-left:4px; border:0;}
+textarea:focus{outline:none; }
+span {font-size:13px;}

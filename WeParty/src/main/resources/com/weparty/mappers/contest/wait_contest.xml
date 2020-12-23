@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wait_contest">
+	<insert id="insertWaitContest">
+		INSERT INTO wait_contest VALUES ((select nvl(max(wait_no), 0)+1 from wait_contest), #{wait_writer_id}, #{wait_title},
+		#{wait_content}, #{wait_host}, #{wait_homepage}, #{wait_target}, #{wait_field}, #{wait_poster}, #{wait_poster_origin}, #{wait_file}, #{wait_file_origin},
+		TO_DATE(#{wait_startdate},'yyyy/mm/dd'), TO_DATE(#{wait_enddate},'yyyy/mm/dd'))
+	</insert>
+	
+	<select id="getWaitContestList" resultType="wait_contest">
+		SELECT * FROM (SELECT rowNum rNum, wait_no, wait_field, wait_title, wait_startdate, wait_enddate 
+		FROM(SELECT * FROM wait_contest ORDER BY wait_no DESC))
+		WHERE rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="getCountList" resultType="int">
+		SELECT count(*) FROM wait_contest
+	</select>
+	
+	<select id="getContestContent" resultType="wait_contest">
+		SELECT * FROM wait_contest WHERE wait_no=#{wait_no}
+	</select>
+	
+	<delete id="deleteWaitContest">
+		DELETE FROM wait_contest WHERE wait_no=#{wait_no}
+	</delete>
+</mapper>
