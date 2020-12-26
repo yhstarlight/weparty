@@ -66,7 +66,7 @@ td {text-align: center !important;}
 	</div>
 	<div class="img_div" style="background-image: url('/resources/img/admin/qa_dashboard.png')">
 		<div class="img_content">
-			<span class="count">${QATotalCount}</span> <span class="count_name">개</span><br><br>
+			<span class="count">${waitQuestionTotalCount}</span> <span class="count_name">개</span><br><br>
 			<span class="count_field">문의</span>
 			<div class="detail_div">
 				<a class="detail_span" href="QA/allList.mdo">자세히 ></a>
